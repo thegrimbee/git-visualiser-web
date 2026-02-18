@@ -182,8 +182,9 @@ export function ObjectGraph({
     const queue = [selectedHash]
     set.add(selectedHash)
 
-    while (queue.length > 0) {
-      const currentHash = queue.shift()!
+    let index = 0
+    while (index < queue.length) {
+      const currentHash = queue[index++]
       const obj = objectMap.get(currentHash)
 
       if (!obj) continue
