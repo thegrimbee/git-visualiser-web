@@ -27,7 +27,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     hash: 'c8f2a3b1e5d7a9c4',
     type: 'commit',
     size: 251,
-    tree: 'f1d4e8a2c9b6f3e7',
+    tree: '631d9e3f7b1d4a8',
     parent: [],
     author: 'Alice <alice@example.com>',
     message: 'Initial commit',
@@ -38,10 +38,11 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     hash: 'e7a3f2d8c1b5e4a9',
     type: 'tree',
     size: 128,
+    names: ['test repo'],
     entries: [
       { mode: '100644', type: 'blob', hash: 'c2a6d9e3f7b1d4a8', name: 'Auth.tsx' },
       { mode: '100644', type: 'blob', hash: 'a9d3f6e2b8c4d1a7', name: 'Login.tsx' },
-      { mode: '040000', type: 'tree', hash: 'f1d4e8a2c9b6f3e7', name: 'utils' },
+      { mode: '040000', type: 'tree', hash: 'abc123def456ghi7', name: 'utils' },
     ],
     referencedBy: ['a7f3c2e4d8b9a1c5'],
   },
@@ -49,16 +50,28 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     hash: 'f1d4e8a2c9b6f3e7',
     type: 'tree',
     size: 96,
+    names: ['test repo'],
     entries: [
       { mode: '100644', type: 'blob', hash: 'b1c8e4d9a3f7b2e6', name: 'api.ts' },
       { mode: '040000', type: 'tree', hash: 'abc123def456ghi7', name: 'utils' },
     ],
-    referencedBy: ['b4e5d1a3c7f2e8b9', 'c8f2a3b1e5d7a9c4', 'e7a3f2d8c1b5e4a9'],
+    referencedBy: ['b4e5d1a3c7f2e8b9'],
+  },
+  {
+    hash: '631d9e3f7b1d4a8',
+    type: 'tree',
+    size: 96,
+    names: ['test repo'],
+    entries: [
+      { mode: '100644', type: 'blob', hash: 'b1c8e4d9a3f7b2e6', name: 'api-renamed.ts' }
+    ],
+    referencedBy: ['c8f2a3b1e5d7a9c4'],
   },
   {
     hash: 'abc123def456ghi7',
     type: 'tree',
     size: 96,
+    names: ['utils'],
     entries: [
       { mode: '100644', type: 'blob', hash: 'd5e2a8f3c7b4d9a1', name: 'README.md' },
       { mode: '040000', type: 'tree', hash: 'fgh789ijk012lmn3', name: 'utils' },
@@ -69,6 +82,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     hash: 'fgh789ijk012lmn3',
     type: 'tree',
     size: 96,
+    names: ['utils'],
     entries: [
     ],
     referencedBy: ['abc123def456ghi7'],
@@ -77,6 +91,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     hash: 'c2a6d9e3f7b1d4a8',
     type: 'blob',
     size: 1847,
+    names: ['Auth.tsx'],
     content: `import { useState } from 'react';
 import { login, logout } from '@renderer/utils/api';
 
@@ -104,6 +119,7 @@ export function Auth() {
     hash: 'a9d3f6e2b8c4d1a7',
     type: 'blob',
     size: 2134,
+    names: ['Login.tsx'],
     content: `import { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -139,6 +155,7 @@ export function LoginForm({ onSubmit }) {
     hash: 'b1c8e4d9a3f7b2e6',
     type: 'blob',
     size: 892,
+    names: ['api.ts', 'api-renamed.ts'],
     content: `const API_URL = 'https://api.example.com';
 
 export async function login(email: string, password: string) {
@@ -153,12 +170,13 @@ export async function login(email: string, password: string) {
 export async function logout() {
   await fetch(\`\${API_URL}/auth/logout\`, { method: 'POST' });
 }`,
-    referencedBy: ['f1d4e8a2c9b6f3e7'],
+    referencedBy: ['f1d4e8a2c9b6f3e7', '631d9e3f7b1d4a8'],
   },
   {
     hash: 'd5e2a8f3c7b4d9a1',
     type: 'blob',
     size: 543,
+    names: ['README.md'],
     content: `# My Project
 
 A simple authentication application.
