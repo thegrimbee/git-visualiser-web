@@ -1,6 +1,5 @@
 import {
   Database,
-  Info,
   Check
 } from 'lucide-react'
 import { ObjectDetail } from './ObjectDetail'
@@ -75,12 +74,10 @@ export function ObjectDatabase(): JSX.Element {
     },
     {} as Record<string, number>
   )
-
-  // derived filtered list
+    // derived filtered list
   const filteredObjects = useMemo(() => {
-    return objects.filter((obj) => visibleTypes.includes(obj.type))
-  }, [objects, visibleTypes])
-
+    return mockObjects.filter((obj) => visibleTypes.includes(obj.type))
+  }, [mockObjects, visibleTypes])
 
   // Helper just for checking inclusion in local rendering
   const isTypeVisible = (type: string): boolean => visibleTypes.includes(type)
@@ -89,23 +86,6 @@ export function ObjectDatabase(): JSX.Element {
     <div className="flex-1 flex bg-[#1e1e1e] overflow-hidden h-full">
       <div className="flex-1 border-r border-gray-700 flex flex-col overflow-hidden relative">
         <div className="p-4 border-b border-gray-700 flex-shrink-0 max-h-[50vh] overflow-y-auto">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Database className="w-5 h-5 text-purple-400" />
-              <h2 className="text-sm font-semibold text-gray-200">Git Objects</h2>
-            </div>
-          </div>
-
-          <div className="bg-blue-500/5 border border-blue-500/20 rounded p-3 mb-3">
-            <div className="flex items-start gap-2">
-              <Info className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-gray-300 leading-relaxed">
-                Git stores everything as objects. Click on any object to explore how they reference
-                each other.
-              </p>
-            </div>
-          </div>
-
           <div className="mb-2">
             <h3 className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mb-2">
               Filter Objects
@@ -140,56 +120,20 @@ export function ObjectDatabase(): JSX.Element {
               ))}
             </div>
           </div>
-
-          {/* <div className="grid grid-cols-2 gap-2">
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded p-2">
-              <div className="flex items-center gap-1 mb-1">
-                <GitCommit className="w-3 h-3 text-blue-400" />
-                <span className="text-xs text-gray-400">Commits</span>
-              </div>
-              <span className="text-lg font-semibold text-blue-300">{objectCounts.commit || 0}</span>
-            </div>
-            
-            <div className="bg-green-500/10 border border-green-500/20 rounded p-2">
-              <div className="flex items-center gap-1 mb-1">
-                <FolderTree className="w-3 h-3 text-green-400" />
-                <span className="text-xs text-gray-400">Trees</span>
-              </div>
-              <span className="text-lg font-semibold text-green-300">{objectCounts.tree || 0}</span>
-            </div>
-            
-            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-2">
-              <div className="flex items-center gap-1 mb-1">
-                <FileText className="w-3 h-3 text-yellow-400" />
-                <span className="text-xs text-gray-400">Blobs</span>
-              </div>
-              <span className="text-lg font-semibold text-yellow-300">{objectCounts.blob || 0}</span>
-            </div>
-            
-            <div className="bg-purple-500/10 border border-purple-500/20 rounded p-2">
-              <div className="flex items-center gap-1 mb-1">
-                <Package className="w-3 h-3 text-purple-400" />
-                <span className="text-xs text-gray-400">Tags</span>
-              </div>
-              <span className="text-lg font-semibold text-purple-300">{objectCounts.tag || 0}</span>
-            </div>
-          </div> */}
         </div>
 
         <div className="flex-1 relative">
           <div
             className={`absolute inset-0 overflow-hidden p-0`}
           >
-            (
-              <ObjectGraph
-                objects={filteredObjects}
-                selectedHash={selectedObject?.hash}
-                onSelectObject={(hash) => {
-                  const obj = objects.find((o) => o.hash === hash)
-                  if (obj) setSelectedObject(obj)
-                }}
-              />
-            )
+            <ObjectGraph 
+              objects={filteredObjects} 
+              selectedHash={selectedObject?.hash}
+              onSelectObject={(hash) => {
+                const obj = mockObjects.find((o) => o.hash === hash)
+                if (obj) setSelectedObject(obj)
+              }}
+            />
           </div>
         </div>
       </div>
