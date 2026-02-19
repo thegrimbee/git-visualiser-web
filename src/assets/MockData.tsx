@@ -42,7 +42,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     entries: [
       { mode: '100644', type: 'blob', hash: 'c2a6d9e3f7b1d4a8', name: 'Auth.tsx' },
       { mode: '100644', type: 'blob', hash: 'a9d3f6e2b8c4d1a7', name: 'Login.tsx' },
-      { mode: '040000', type: 'tree', hash: 'f1d4e8a2c9b6f3e7', name: 'utils' },
+      { mode: '040000', type: 'tree', hash: 'abc123def456ghi7', name: 'utils' },
     ],
     referencedBy: ['a7f3c2e4d8b9a1c5'],
   },
@@ -55,7 +55,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
       { mode: '100644', type: 'blob', hash: 'b1c8e4d9a3f7b2e6', name: 'api.ts' },
       { mode: '040000', type: 'tree', hash: 'abc123def456ghi7', name: 'utils' },
     ],
-    referencedBy: ['b4e5d1a3c7f2e8b9', 'c8f2a3b1e5d7a9c4', 'e7a3f2d8c1b5e4a9'],
+    referencedBy: ['b4e5d1a3c7f2e8b9'],
   },
   {
     hash: '631d9e3f7b1d4a8',
@@ -65,7 +65,7 @@ export const mockObjects: Array<CommitObject | TreeObject | BlobObject | GitObje
     entries: [
       { mode: '100644', type: 'blob', hash: 'b1c8e4d9a3f7b2e6', name: 'api-renamed.ts' }
     ],
-    referencedBy: ['b4e5d1a3c7f2e8b9', 'c8f2a3b1e5d7a9c4', 'e7a3f2d8c1b5e4a9'],
+    referencedBy: ['c8f2a3b1e5d7a9c4'],
   },
   {
     hash: 'abc123def456ghi7',

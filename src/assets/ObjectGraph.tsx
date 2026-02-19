@@ -135,7 +135,7 @@ export function ObjectGraph({
         x: COL_START_OBJECTS + depth * DEPTH_INDENT,
         y: startY + index * ROW_HEIGHT + NODE_TO_LABELS_GAP,
         hash: blobObj.hash,
-        label: blobObj.names.length > 0 ? blobObj.names[0] : blobObj.hash,
+        label: blobObj.names.length > 0 ? blobObj.names[0] : blobObj.hash.substring(0, 6),
         type: 'blob',
         depth
       })

@@ -301,7 +301,7 @@ export function ObjectDetail({
             <span className="text-xs text-gray-400">File Name{blob.names.length > 1 ? `s (${blob.names.length})` : ''}</span>
           </div>
           <p className="text-sm text-gray-200 font-medium">
-             {blob.names.length > 0 ? blob.names.slice(0, 5).join(', ') : <span className="text-gray-500 italic">No name associated</span>}
+            {blob.names.length > 0 ? blob.names.slice(0, 5).join(', ') : <span className="text-gray-500 italic">No name associated</span>}
           </p>
         </div>
 
