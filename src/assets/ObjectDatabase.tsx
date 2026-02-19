@@ -28,6 +28,7 @@ export interface CommitObject extends GitObject {
 
 export interface TreeObject extends GitObject {
   type: 'tree'
+  names: string[]
   entries: Array<{
     mode: string
     type: 'blob' | 'tree'
@@ -38,6 +39,7 @@ export interface TreeObject extends GitObject {
 
 export interface BlobObject extends GitObject {
   type: 'blob'
+  names: string[]
   content: string
 }
 
