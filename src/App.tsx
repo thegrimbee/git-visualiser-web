@@ -1,11 +1,10 @@
-import { ObjectDatabase } from "./assets/ObjectDatabase"
+import { ObjectDatabase } from './assets/ObjectDatabase'
 
 // src/App.tsx
 function App() {
 
   return (
-            <ObjectDatabase />
-
+    <ObjectDatabase />
   )
 }
 
