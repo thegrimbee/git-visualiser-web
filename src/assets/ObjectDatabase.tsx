@@ -1,12 +1,13 @@
 import {
   Database,
-  Check
+  Check,
+  ChevronDown
 } from 'lucide-react'
 import { ObjectDetail } from './ObjectDetail'
 import { ObjectGraph } from './ObjectGraph'
 import { useMemo, useState } from 'react'
 import type { JSX } from 'react'
-import { mockObjects } from './MockData'
+import { mockDataList } from './MockData'
 
 export interface GitObject {
   hash: string
@@ -51,7 +52,9 @@ export interface TagObject extends GitObject {
 
 export function ObjectDatabase(): JSX.Element {
   const [selectedObject, setSelectedObject] = useState<GitObject | null>(null)
-  const objects = mockObjects
+  const [currentMockIndex, setCurrentMockIndex] = useState(0)
+  
+  const objects = useMemo(() => mockDataList[currentMockIndex].objects, [currentMockIndex])
   const [visibleTypes, setVisibleTypes] = useState(['commit', 'tree', 'blob', 'tag'])
 
   const getTypeColor = (type: string): string => {
@@ -69,6 +72,11 @@ export function ObjectDatabase(): JSX.Element {
     }
   }
 
+  const handleDatasetChange = (index: number) => {
+    setCurrentMockIndex(index)
+    setSelectedObject(null) // Reset selection when switching datasets
+  }
+  
   const objectCounts = objects.reduce(
     (acc, obj) => {
       acc[obj.type] = (acc[obj.type] || 0) + 1
@@ -78,8 +86,8 @@ export function ObjectDatabase(): JSX.Element {
   )
     // derived filtered list
   const filteredObjects = useMemo(() => {
-    return mockObjects.filter((obj) => visibleTypes.includes(obj.type))
-  }, [mockObjects, visibleTypes])
+    return objects.filter((obj) => visibleTypes.includes(obj.type))
+  }, [objects, visibleTypes])
 
   // Helper just for checking inclusion in local rendering
   const isTypeVisible = (type: string): boolean => visibleTypes.includes(type)
@@ -88,6 +96,34 @@ export function ObjectDatabase(): JSX.Element {
     <div className="flex-1 flex bg-[#1e1e1e] overflow-hidden h-full">
       <div className="flex-1 border-r border-gray-700 flex flex-col overflow-hidden relative">
         <div className="p-4 border-b border-gray-700 flex-shrink-0 max-h-[50vh] overflow-y-auto">
+          
+          <div className="mb-4">
+            <h3 className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mb-2">
+                  Select Repository
+            </h3>
+            <div className="relative">
+              <select
+                value={currentMockIndex}
+                onChange={(e) => handleDatasetChange(Number(e.target.value))}
+                className="w-full bg-[#252526] border border-gray-700 text-gray-300 text-xs rounded px-2 py-1.5 appearance-none focus:outline-none focus:border-blue-500/50 pr-8"
+              >
+                {mockDataList.map((data, index) => (
+                  <option key={index} value={index}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                <ChevronDown className="w-3 h-3 text-gray-500" />
+              </div>
+            </div>
+            {mockDataList[currentMockIndex].description && (
+              <p className="mt-1 text-[10px] text-gray-500 truncate">
+                {mockDataList[currentMockIndex].description}
+              </p>
+            )}
+          </div>
+
           <div className="mb-2">
             <h3 className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mb-2">
               Filter Objects
@@ -132,7 +168,7 @@ export function ObjectDatabase(): JSX.Element {
               objects={filteredObjects} 
               selectedHash={selectedObject?.hash}
               onSelectObject={(hash) => {
-                const obj = mockObjects.find((o) => o.hash === hash)
+                const obj = objects.find((o) => o.hash === hash)
                 if (obj) setSelectedObject(obj)
               }}
             />
