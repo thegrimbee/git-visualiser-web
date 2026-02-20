@@ -55,7 +55,7 @@ export const editFileRepo: MockData = {
 This repository demonstrates file editing in Git.
 
 This file has been edited in the latest commit to show how file changes are represented in Git.`,
-            referencedBy: ['71e2f3a4b5c6d7e8']
+            referencedBy: ['f9b2c3d4e5f6g7h8']
         },
         {
             hash: 'ce5623b7892ab890',
