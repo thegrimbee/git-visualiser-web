@@ -24,7 +24,7 @@ export const defaultRepo: MockData = {
       diff: [
         { status: 'A', path: 'Auth.tsx', hash: 'c2a6d9e3f7b1d4a8' },
         { status: 'A', path: 'Login.tsx', hash: 'a9d3f6e2b8c4d1a7' },
-        { status: 'R', path: 'api.ts', hash: 'b1c8e4d9a3f7b2e6' },
+        { status: 'R', path: 'api-renamed.ts', hash: 'b1c8e4d9a3f7b2e6' },
       ]
     },
     {
