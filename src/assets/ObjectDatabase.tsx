@@ -1,11 +1,13 @@
 import {
   Database,
   Check,
-  ChevronDown
+  ChevronDown,
+  Loader2,
+  AlertCircle
 } from 'lucide-react'
 import { ObjectDetail } from './ObjectDetail'
 import { ObjectGraph } from './ObjectGraph'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import type { JSX } from 'react'
 import { mockDataList } from './MockData'
 
@@ -50,12 +52,68 @@ export interface TagObject extends GitObject {
   objectHash: string
 }
 
+interface RepositoryData {
+  repositoryName: string
+  repositoryPath?: string
+  description?: string
+  exportDate?: string
+  totalObjects?: number
+  objects: GitObject[]
+  name?: string
+}
 
 export function ObjectDatabase(): JSX.Element {
   const [selectedObject, setSelectedObject] = useState<GitObject | null>(null)
   const [currentMockIndex, setCurrentMockIndex] = useState(0)
+
+  // State for handling external URL data
+  const [customData, setCustomData] = useState<RepositoryData | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   
-  const objects = useMemo(() => mockDataList[currentMockIndex].objects, [currentMockIndex])
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const url = params.get('url')
+    console.log(url)
+
+    if (url) {
+      fetch(url)
+        .then(async (res) => {
+          if (!res.ok) throw new Error(`Failed to load: ${res.statusText}`)
+          const data = await res.json()
+          // Basic validation could go here
+          if (!data.objects || !Array.isArray(data.objects)) {
+            throw new Error('Invalid JSON format: missing "objects" array')
+          }
+          setCustomData({
+            ...data,
+            name: data.repositoryName || 'External Repository' // Ensure it has a display name
+          })
+          // Automatically select the new custom dataset (last index after mocked data)
+          setCurrentMockIndex(mockDataList.length) 
+        })
+        .catch((err) => {
+          setError(err.message)
+          console.error('Error fetching git objects:', err)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }, [])
+
+  // Combine mock data and custom data
+  const availableDatasets = useMemo(() => {
+    return customData ? [...mockDataList, customData] : mockDataList
+  }, [customData])
+
+    // Use availableDatasets instead of mockDataList directly
+  const objects = useMemo(() => {
+    // Safety check in case index is out of bounds
+    const dataset = availableDatasets[currentMockIndex] || availableDatasets[0]
+    return dataset.objects as GitObject[]
+  }, [currentMockIndex, availableDatasets])
+
   const [visibleTypes, setVisibleTypes] = useState(['commit', 'tree', 'blob', 'tag'])
 
   const getTypeColor = (type: string): string => {
@@ -77,7 +135,7 @@ export function ObjectDatabase(): JSX.Element {
     setCurrentMockIndex(index)
     setSelectedObject(null) // Reset selection when switching datasets
   }
-  
+
   const objectCounts = objects.reduce(
     (acc, obj) => {
       acc[obj.type] = (acc[obj.type] || 0) + 1
@@ -85,13 +143,44 @@ export function ObjectDatabase(): JSX.Element {
     },
     {} as Record<string, number>
   )
-    // derived filtered list
+  
+  // derived filtered list
   const filteredObjects = useMemo(() => {
     return objects.filter((obj) => visibleTypes.includes(obj.type))
   }, [objects, visibleTypes])
 
   // Helper just for checking inclusion in local rendering
   const isTypeVisible = (type: string): boolean => visibleTypes.includes(type)
+
+  // Handle loading and error states
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#1e1e1e] text-gray-400">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+          <p>Loading repository data...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#1e1e1e] text-red-400">
+        <div className="flex flex-col items-center gap-4 max-w-md text-center p-6 border border-red-500/30 rounded-lg bg-red-500/10">
+          <AlertCircle className="w-10 h-10" />
+          <h2 className="text-xl font-semibold">Error Loading Data</h2>
+          <p className="text-sm text-gray-400">{error}</p>
+          <button 
+            onClick={() => window.location.search = ''}
+            className="mt-4 px-4 py-2 bg-[#252526] hover:bg-[#333] text-gray-300 rounded text-sm transition-colors"
+          >
+            Load Default Data
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex-1 flex bg-[#1e1e1e] overflow-hidden h-full">
@@ -108,9 +197,9 @@ export function ObjectDatabase(): JSX.Element {
                 onChange={(e) => handleDatasetChange(Number(e.target.value))}
                 className="w-full bg-[#252526] border border-gray-700 text-gray-300 text-xs rounded px-2 py-1.5 appearance-none focus:outline-none focus:border-blue-500/50 pr-8"
               >
-                {mockDataList.map((data, index) => (
+                {availableDatasets.map((data, index) => (
                   <option key={index} value={index}>
-                    {data.name}
+                    {data.name || (data as RepositoryData).repositoryName}
                   </option>
                 ))}
               </select>
@@ -118,9 +207,14 @@ export function ObjectDatabase(): JSX.Element {
                 <ChevronDown className="w-3 h-3 text-gray-500" />
               </div>
             </div>
-            {mockDataList[currentMockIndex].description && (
+            {availableDatasets[currentMockIndex]?.description && (
               <p className="mt-1 text-[10px] text-gray-500 truncate">
-                {mockDataList[currentMockIndex].description}
+                {availableDatasets[currentMockIndex].description}
+              </p>
+            )}
+            {customData && currentMockIndex === availableDatasets.length && (
+              <p className="mt-1 text-[10px] text-blue-400 truncate flex items-center gap-1">
+                 Loaded from URL
               </p>
             )}
           </div>

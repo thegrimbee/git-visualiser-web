@@ -1,0 +1,310 @@
+{
+  "repositoryName": "git test",
+  "repositoryPath": "D:\\Education\\CS3281\\git test",
+  "exportDate": "2026-03-02T04:01:02.978Z",
+  "totalObjects": 14,
+  "objects": [
+    {
+      "hash": "test-tag",
+      "type": "tag",
+      "size": 0,
+      "objectHash": "497c6f986b511b5f3a9d3713172c91398b19658f",
+      "references": [
+        "497c6f986b511b5f3a9d3713172c91398b19658f"
+      ],
+      "referencedBy": []
+    },
+    {
+      "hash": "062e189ee1f918c646c3ddd56c891f26482a872c",
+      "type": "tree",
+      "size": 33,
+      "references": [
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "referencedBy": [
+        "0cf982de32680c846c7764925b8e9077f305be59"
+      ],
+      "names": [
+        "test3"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "t.txt",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "type": "blob"
+        }
+      ]
+    },
+    {
+      "hash": "095a057d4a651ec412d06b59e32e9b02871592d5",
+      "type": "tree",
+      "size": 36,
+      "references": [
+        "30d74d258442c7c65512eafab474568dd706c430"
+      ],
+      "referencedBy": [
+        "47d7e9b0107f8f0cb72350c9fc716f559ccb650c"
+      ],
+      "names": [
+        "git test"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "test.txt",
+          "hash": "30d74d258442c7c65512eafab474568dd706c430",
+          "type": "blob"
+        }
+      ]
+    },
+    {
+      "hash": "0b8695f38ed95b6927aec8415ab7186433ab71bc",
+      "type": "tree",
+      "size": 65,
+      "references": [
+        "8615dbab6d0c5df4ddbd30a79690dbccea6872bf",
+        "0cf982de32680c846c7764925b8e9077f305be59"
+      ],
+      "referencedBy": [
+        "7931d3b64a5df57c95cc3362643c06c317901a22"
+      ],
+      "names": [
+        "test1"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "a.txt",
+          "hash": "8615dbab6d0c5df4ddbd30a79690dbccea6872bf",
+          "type": "blob"
+        },
+        {
+          "mode": "40000",
+          "name": "test2",
+          "hash": "0cf982de32680c846c7764925b8e9077f305be59",
+          "type": "tree"
+        }
+      ]
+    },
+    {
+      "hash": "0cf982de32680c846c7764925b8e9077f305be59",
+      "type": "tree",
+      "size": 32,
+      "references": [
+        "062e189ee1f918c646c3ddd56c891f26482a872c"
+      ],
+      "referencedBy": [
+        "0b8695f38ed95b6927aec8415ab7186433ab71bc"
+      ],
+      "names": [
+        "test2"
+      ],
+      "entries": [
+        {
+          "mode": "40000",
+          "name": "test3",
+          "hash": "062e189ee1f918c646c3ddd56c891f26482a872c",
+          "type": "tree"
+        }
+      ]
+    },
+    {
+      "hash": "1239606418c6f9a895e5edd540ffc05dfb4ad04f",
+      "type": "tree",
+      "size": 68,
+      "references": [
+        "30d74d258442c7c65512eafab474568dd706c430",
+        "949aee5f1328ac4c843570d07530094ce2dad4db"
+      ],
+      "referencedBy": [
+        "cb029597f39ff59991cf0e7b6d9399d3deece158"
+      ],
+      "names": [
+        "git test"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "test.txt",
+          "hash": "30d74d258442c7c65512eafab474568dd706c430",
+          "type": "blob"
+        },
+        {
+          "mode": "40000",
+          "name": "test1",
+          "hash": "949aee5f1328ac4c843570d07530094ce2dad4db",
+          "type": "tree"
+        }
+      ]
+    },
+    {
+      "hash": "30d74d258442c7c65512eafab474568dd706c430",
+      "type": "blob",
+      "size": 4,
+      "references": [],
+      "referencedBy": [
+        "095a057d4a651ec412d06b59e32e9b02871592d5",
+        "1239606418c6f9a895e5edd540ffc05dfb4ad04f",
+        "7931d3b64a5df57c95cc3362643c06c317901a22"
+      ],
+      "names": [
+        "test.txt"
+      ],
+      "content": "test"
+    },
+    {
+      "hash": "47d7e9b0107f8f0cb72350c9fc716f559ccb650c",
+      "type": "commit",
+      "size": 199,
+      "references": [
+        "095a057d4a651ec412d06b59e32e9b02871592d5"
+      ],
+      "referencedBy": [
+        "cb029597f39ff59991cf0e7b6d9399d3deece158"
+      ],
+      "diff": [
+        {
+          "status": "A",
+          "path": "test.txt",
+          "hash": "30d74d258442c7c65512eafab474568dd706c430"
+        }
+      ],
+      "parent": [],
+      "tree": "095a057d4a651ec412d06b59e32e9b02871592d5",
+      "author": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1768800281 +0800",
+      "committer": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1768800281 +0800",
+      "message": "lalala"
+    },
+    {
+      "hash": "497c6f986b511b5f3a9d3713172c91398b19658f",
+      "type": "commit",
+      "size": 248,
+      "references": [
+        "7931d3b64a5df57c95cc3362643c06c317901a22",
+        "cb029597f39ff59991cf0e7b6d9399d3deece158"
+      ],
+      "referencedBy": [
+        "test-tag"
+      ],
+      "diff": [
+        {
+          "status": "A",
+          "path": "test1/test2/test3/t.txt",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+        }
+      ],
+      "parent": [
+        "cb029597f39ff59991cf0e7b6d9399d3deece158"
+      ],
+      "tree": "7931d3b64a5df57c95cc3362643c06c317901a22",
+      "author": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1769075964 +0800",
+      "committer": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1769075964 +0800",
+      "message": "askfmal"
+    },
+    {
+      "hash": "7931d3b64a5df57c95cc3362643c06c317901a22",
+      "type": "tree",
+      "size": 68,
+      "references": [
+        "30d74d258442c7c65512eafab474568dd706c430",
+        "0b8695f38ed95b6927aec8415ab7186433ab71bc"
+      ],
+      "referencedBy": [
+        "497c6f986b511b5f3a9d3713172c91398b19658f"
+      ],
+      "names": [
+        "git test"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "test.txt",
+          "hash": "30d74d258442c7c65512eafab474568dd706c430",
+          "type": "blob"
+        },
+        {
+          "mode": "40000",
+          "name": "test1",
+          "hash": "0b8695f38ed95b6927aec8415ab7186433ab71bc",
+          "type": "tree"
+        }
+      ]
+    },
+    {
+      "hash": "8615dbab6d0c5df4ddbd30a79690dbccea6872bf",
+      "type": "blob",
+      "size": 7,
+      "references": [],
+      "referencedBy": [
+        "0b8695f38ed95b6927aec8415ab7186433ab71bc",
+        "949aee5f1328ac4c843570d07530094ce2dad4db"
+      ],
+      "names": [
+        "a.txt"
+      ],
+      "content": "1234567"
+    },
+    {
+      "hash": "949aee5f1328ac4c843570d07530094ce2dad4db",
+      "type": "tree",
+      "size": 33,
+      "references": [
+        "8615dbab6d0c5df4ddbd30a79690dbccea6872bf"
+      ],
+      "referencedBy": [
+        "1239606418c6f9a895e5edd540ffc05dfb4ad04f"
+      ],
+      "names": [
+        "test1"
+      ],
+      "entries": [
+        {
+          "mode": "100644",
+          "name": "a.txt",
+          "hash": "8615dbab6d0c5df4ddbd30a79690dbccea6872bf",
+          "type": "blob"
+        }
+      ]
+    },
+    {
+      "hash": "cb029597f39ff59991cf0e7b6d9399d3deece158",
+      "type": "commit",
+      "size": 245,
+      "references": [
+        "1239606418c6f9a895e5edd540ffc05dfb4ad04f",
+        "47d7e9b0107f8f0cb72350c9fc716f559ccb650c"
+      ],
+      "referencedBy": [
+        "497c6f986b511b5f3a9d3713172c91398b19658f"
+      ],
+      "diff": [
+        {
+          "status": "A",
+          "path": "test1/a.txt",
+          "hash": "8615dbab6d0c5df4ddbd30a79690dbccea6872bf"
+        }
+      ],
+      "parent": [
+        "47d7e9b0107f8f0cb72350c9fc716f559ccb650c"
+      ],
+      "tree": "1239606418c6f9a895e5edd540ffc05dfb4ad04f",
+      "author": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1768801062 +0800",
+      "committer": "thegrimbee <gabriel.mario.antaputra@gmail.com> 1768801062 +0800",
+      "message": "test"
+    },
+    {
+      "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "type": "blob",
+      "size": 0,
+      "references": [],
+      "referencedBy": [
+        "062e189ee1f918c646c3ddd56c891f26482a872c"
+      ],
+      "names": [
+        "t.txt"
+      ],
+      "content": ""
+    }
+  ]
+}
