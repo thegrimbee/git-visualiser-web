@@ -6,7 +6,7 @@ import {
 } from 'lucide-react'
 import { ObjectDetail } from './ObjectDetail'
 import { ObjectGraph } from './ObjectGraph'
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useCallback } from 'react'
 import type { JSX } from 'react'
 import { mockDataList } from './MockData'
 
@@ -91,7 +91,7 @@ export function ObjectDatabase(): JSX.Element {
   const [error, setError] = useState<string | null>(null)
   
   // Extract fetch logic to reusable function
-  const loadFromUrl = async (url: string) => {
+  const loadFromUrl = useCallback(async (url: string) => {
     if (!url) return
 
     setIsLoading(true)
@@ -120,7 +120,7 @@ export function ObjectDatabase(): JSX.Element {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -129,7 +129,7 @@ export function ObjectDatabase(): JSX.Element {
       setUrlInput(url)
       loadFromUrl(url)
     }
-  }, [])
+  }, [loadFromUrl])
 
   const handleUrlSubmit = () => {
     if (!urlInput.trim()) return
@@ -261,7 +261,7 @@ export function ObjectDatabase(): JSX.Element {
                 {availableDatasets[currentMockIndex].description}
               </p>
             )}
-            {customData && currentMockIndex === availableDatasets.length && (
+            {customData && currentMockIndex === availableDatasets.length - 1 && (
               <p className="mt-1 text-[10px] text-blue-400 truncate flex items-center gap-1">
                  Loaded from URL
               </p>
